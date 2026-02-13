@@ -1,0 +1,18 @@
+@inherits OrchardCore.DisplayManagement.Razor.RazorPage<dynamic>
+
+@{
+    ViewLayout = "Layout__Login";
+}
+
+<link rel="stylesheet" href="~/DashboardAdminTheme/css/login-modern.css" />
+
+<section class="oc-login-page">
+    <div class="oc-login-card">
+        <div class="oc-login-header">
+            <h1>@T["欢迎注册"]</h1>
+            <p>@T["创建账号以继续访问后台。"]</p>
+        </div>
+
+        @await DisplayAsync(Model)
+    </div>
+</section>

@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="OrchardCore.Admin" Version="$(OrchardCoreVersion)" />
+		<PackageReference Include="OrchardCore.Application.Mvc.Targets" Version="$(OrchardCoreVersion)" />
+		<PackageReference Include="OrchardCore.Features" Version="$(OrchardCoreVersion)" />
+		<PackageReference Include="OrchardCore.Infrastructure" Version="$(OrchardCoreVersion)" />
+		<PackageReference Include="OrchardCore.Microsoft.Authentication" Version="$(OrchardCoreVersion)" />
+		<PackageReference Include="OrchardCore.Navigation" Version="$(OrchardCoreVersion)" />
+		<PackageReference Include="OrchardCore.Recipes" Version="$(OrchardCoreVersion)" />
+		<PackageReference Include="OrchardCore.Resources" Version="$(OrchardCoreVersion)" />
+		<PackageReference Include="OrchardCore.Roles" Version="$(OrchardCoreVersion)" />
+		<PackageReference Include="OrchardCore.Settings" Version="$(OrchardCoreVersion)" />
+		<PackageReference Include="OrchardCore.Setup" Version="$(OrchardCoreVersion)" />
+		<PackageReference Include="OrchardCore.Tenants" Version="$(OrchardCoreVersion)" />
+		<PackageReference Include="OrchardCore.Themes" Version="$(OrchardCoreVersion)" />
+		<PackageReference Include="OrchardCore.Users" Version="$(OrchardCoreVersion)" />
+		<PackageReference Include="SafeMode" Version="$(OrchardCoreVersion)" />
+		<PackageReference Include="TheAdmin" Version="$(OrchardCoreVersion)" />
+		<!-- If Module1 were a NuGet package instead of a project you could reference it this way: <PackageReference Include="Module1" Version="1.0.4" /> -->
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\DashboardAdminTheme\CustomAdminTheme.csproj" />
+		<ProjectReference Include="..\Module1\Module1.csproj" />
+		<ProjectReference Include="..\Module2\Module2.csproj" />
+	</ItemGroup>
+
+</Project>

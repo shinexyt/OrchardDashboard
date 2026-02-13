@@ -1,0 +1,61 @@
+@inherits OrchardCore.DisplayManagement.Razor.RazorPage<dynamic>
+@using Microsoft.AspNetCore.Identity
+@using OrchardCore.Entities
+@using OrchardCore.Users
+@using OrchardCore.Users.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@inject SignInManager<IUser> SignInManager
+
+@{
+    ViewLayout = "Layout__Login";
+
+    var loginProviders = (await SignInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+    var hasExternalProviders = loginProviders.Any();
+    var disableLocalLogin = Site.As<LoginSettings>()?.DisableLocalLogin ?? false;
+}
+
+<link rel="stylesheet" href="~/DashboardAdminTheme/css/login-modern.css" />
+
+<section class="oc-login-page">
+    <div class="oc-login-card">
+        <div class="oc-login-header">
+            <h1>@T["欢迎登录"]</h1>
+            <p>@T["使用本地账号或 Microsoft 账号登录。"]</p>
+        </div>
+
+        @if (!ViewContext.ModelState.IsValid)
+        {
+            <div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
+        }
+
+        @if (!disableLocalLogin)
+        {
+            <div class="oc-login-local">
+                @await DisplayAsync(Model)
+            </div>
+        }
+
+        @if (hasExternalProviders)
+        {
+            <div class="oc-login-divider"><span>@T["或"]</span></div>
+
+            <form asp-controller="ExternalAuthentications"
+                  asp-action="ExternalLogin"
+                  asp-route-returnurl="@ViewData["ReturnUrl"]"
+                  method="post"
+                  class="no-multisubmit oc-external-form">
+                @foreach (var provider in loginProviders)
+                {
+                    <button type="submit"
+                            class="btn btn-outline-primary w-100 mb-2"
+                            name="provider"
+                            value="@provider.Name"
+                            title="@T["使用 {0} 登录", provider.DisplayName]">
+                        @provider.DisplayName
+                    </button>
+                }
+            </form>
+        }
+    </div>
+</section>
