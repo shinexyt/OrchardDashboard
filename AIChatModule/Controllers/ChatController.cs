@@ -20,6 +20,7 @@ public class ChatController : Controller
     }
 
     [HttpPost("/chat/stream")]
+    [IgnoreAntiforgeryToken]
     public async Task StreamChat([FromBody] ChatRequest request, CancellationToken cancellationToken)
     {
         Response.ContentType = "text/event-stream";
