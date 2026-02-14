@@ -25,6 +25,7 @@ namespace AIChatModule.Controllers
         }
 
         [HttpPost("/chat/stream")]
+        [IgnoreAntiforgeryToken]
         public async Task StreamChat([FromBody] ChatRequest request, CancellationToken cancellationToken)
         {
             Response.Headers["Content-Type"] = "text/event-stream";
