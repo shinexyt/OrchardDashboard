@@ -27,6 +27,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomAdminTheme", "DashboardAdminTheme\CustomAdminTheme.csproj", "{542F772B-0BCA-497A-95E8-A04DB9A7B0EC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIChatModule", "AIChatModule\AIChatModule.csproj", "{D13FD9B8-2AB6-4FB8-B0C0-5B46627285AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,6 +87,18 @@ Global
 		{542F772B-0BCA-497A-95E8-A04DB9A7B0EC}.Release|x64.Build.0 = Release|Any CPU
 		{542F772B-0BCA-497A-95E8-A04DB9A7B0EC}.Release|x86.ActiveCfg = Release|Any CPU
 		{542F772B-0BCA-497A-95E8-A04DB9A7B0EC}.Release|x86.Build.0 = Release|Any CPU
+		{D13FD9B8-2AB6-4FB8-B0C0-5B46627285AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D13FD9B8-2AB6-4FB8-B0C0-5B46627285AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D13FD9B8-2AB6-4FB8-B0C0-5B46627285AD}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D13FD9B8-2AB6-4FB8-B0C0-5B46627285AD}.Debug|x64.Build.0 = Debug|Any CPU
+		{D13FD9B8-2AB6-4FB8-B0C0-5B46627285AD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D13FD9B8-2AB6-4FB8-B0C0-5B46627285AD}.Debug|x86.Build.0 = Debug|Any CPU
+		{D13FD9B8-2AB6-4FB8-B0C0-5B46627285AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D13FD9B8-2AB6-4FB8-B0C0-5B46627285AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D13FD9B8-2AB6-4FB8-B0C0-5B46627285AD}.Release|x64.ActiveCfg = Release|Any CPU
+		{D13FD9B8-2AB6-4FB8-B0C0-5B46627285AD}.Release|x64.Build.0 = Release|Any CPU
+		{D13FD9B8-2AB6-4FB8-B0C0-5B46627285AD}.Release|x86.ActiveCfg = Release|Any CPU
+		{D13FD9B8-2AB6-4FB8-B0C0-5B46627285AD}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
