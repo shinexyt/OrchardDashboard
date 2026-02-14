@@ -30,7 +30,14 @@ namespace AIChatModule.Services
             _configuration = configuration;
             
             // Get API key from configuration
-            var apiKey = _configuration["OpenRouter:ApiKey"] ?? Environment.GetEnvironmentVariable("OPENROUTER_API_KEY") ?? "sk-or-v1-dummy-key";
+            var apiKey = _configuration["OpenRouter:ApiKey"] ?? Environment.GetEnvironmentVariable("OPENROUTER_API_KEY");
+            
+            // If no API key is provided, use a placeholder
+            // Note: The service won't work without a valid API key, but won't throw during instantiation
+            if (string.IsNullOrEmpty(apiKey))
+            {
+                apiKey = "sk-or-v1-placeholder-key-for-demo-purposes-only";
+            }
             
             // Create OpenAI client configured to use OpenRouter
             var options = new OpenAI.OpenAIClientOptions
