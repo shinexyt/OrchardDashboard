@@ -64,13 +64,14 @@ Once the module is enabled:
   - `GET /chat`: Serves the chat UI
   - `POST /chat/stream`: SSE endpoint for streaming AI responses
 
-- **ChatService**: Implements the AI chat logic using OpenAI SDK
-  - Uses `ChatClient` from OpenAI SDK
-  - Connects to OpenRouter's OpenAI-compatible API
-  - Streams responses chunk by chunk
+- **ChatService**: Implements the AI chat logic using Microsoft.Extensions.AI abstractions
+  - Uses `IChatClient` interface from Microsoft.Extensions.AI
+  - Connects to OpenRouter via OpenAI SDK wrapped in IChatClient abstraction
+  - Streams responses using `GetStreamingResponseAsync` method
 
 - **Startup**: Configures dependency injection
-  - Registers `ChatClient` with OpenRouter configuration
+  - Registers `IChatClient` using `AsIChatClient()` extension method
+  - Wraps OpenAI SDK's ChatClient in Microsoft.Extensions.AI abstraction layer
   - Registers `ChatService` for chat operations
   - Adds MVC controllers for routing
 
@@ -87,7 +88,10 @@ Once the module is enabled:
 ## Technical Details
 
 - **SSE Implementation**: The backend sends data in the `data: {json}\n\n` format
-- **Microsoft.Extensions.AI**: Uses the latest .NET AI abstractions (v10.3.0)
+- **Microsoft.Extensions.AI**: Uses the official .NET AI abstractions (v10.3.0)
+  - `IChatClient` interface provides provider-agnostic chat functionality
+  - `GetStreamingResponseAsync` method for streaming responses
+  - `AsIChatClient()` extension converts OpenAI SDK client to IChatClient
 - **OpenAI SDK**: Leverages OpenAI SDK for OpenRouter compatibility
 - **Streaming**: Real-time token-by-token response streaming for better UX
 

@@ -1,12 +1,11 @@
+using Microsoft.Extensions.AI;
 using System;
 using System.Runtime.CompilerServices;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using OpenAI.Chat;
 using AppChatMessage = AIChatModule.Models.ChatMessage;
-using OpenAIChatMessage = OpenAI.Chat.ChatMessage;
 
 namespace AIChatModule.Services
 {
@@ -17,9 +16,9 @@ namespace AIChatModule.Services
 
     public class OpenRouterChatService : IChatService
     {
-        private readonly ChatClient _chatClient;
+        private readonly IChatClient _chatClient;
 
-        public OpenRouterChatService(ChatClient chatClient)
+        public OpenRouterChatService(IChatClient chatClient)
         {
             _chatClient = chatClient;
         }
@@ -28,24 +27,27 @@ namespace AIChatModule.Services
             List<AppChatMessage> messages, 
             [EnumeratorCancellation] CancellationToken cancellationToken = default)
         {
+            // Convert app messages to Microsoft.Extensions.AI ChatMessage format
             var chatMessages = messages.Select(m => 
-                m.Role switch
-                {
-                    "user" => new UserChatMessage(m.Content) as OpenAIChatMessage,
-                    "assistant" => new AssistantChatMessage(m.Content) as OpenAIChatMessage,
-                    "system" => new SystemChatMessage(m.Content) as OpenAIChatMessage,
-                    _ => new UserChatMessage(m.Content) as OpenAIChatMessage
-                }
+                new ChatMessage(
+                    m.Role switch
+                    {
+                        "user" => ChatRole.User,
+                        "assistant" => ChatRole.Assistant,
+                        "system" => ChatRole.System,
+                        _ => ChatRole.User
+                    },
+                    m.Content
+                )
             ).ToList();
 
-            await foreach (var update in _chatClient.CompleteChatStreamingAsync(chatMessages, cancellationToken: cancellationToken))
+            // Use GetStreamingResponseAsync from IChatClient (the correct method name)
+            await foreach (var update in _chatClient.GetStreamingResponseAsync(chatMessages, cancellationToken: cancellationToken))
             {
-                foreach (var contentPart in update.ContentUpdate)
+                // Extract text from the streaming response
+                if (!string.IsNullOrEmpty(update.Text))
                 {
-                    if (!string.IsNullOrEmpty(contentPart.Text))
-                    {
-                        yield return contentPart.Text;
-                    }
+                    yield return update.Text;
                 }
             }
         }

@@ -2,10 +2,10 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.AI;
 using AIChatModule.Models;
 using AIChatModule.Services;
 using OpenAI;
-using OpenAI.Chat;
 using System;
 using System.ClientModel;
 
@@ -26,8 +26,9 @@ namespace AIChatModule
             var openRouterSettings = new OpenRouterSettings();
             _configuration.GetSection("OpenRouter").Bind(openRouterSettings);
 
-            // Register ChatClient using OpenAI SDK with OpenRouter endpoint
-            services.AddSingleton<ChatClient>(sp =>
+            // Register IChatClient using Microsoft.Extensions.AI abstraction
+            // This uses the OpenAI SDK but wraps it in the IChatClient interface
+            services.AddSingleton<IChatClient>(sp =>
             {
                 var credential = new ApiKeyCredential(openRouterSettings.ApiKey);
                 var openAiClient = new OpenAIClient(
@@ -37,7 +38,8 @@ namespace AIChatModule
                         Endpoint = new Uri(openRouterSettings.BaseUrl)
                     });
 
-                return openAiClient.GetChatClient(openRouterSettings.Model);
+                // Use AsIChatClient() extension method to get IChatClient abstraction
+                return openAiClient.GetChatClient(openRouterSettings.Model).AsIChatClient();
             });
 
             // Register chat service
