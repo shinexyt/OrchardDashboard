@@ -23,6 +23,7 @@
         "OrchardCore.Users.ExternalAuthentication",
         "OrchardCore.Users",
         "OrchardCore.Microsoft.Authentication.MicrosoftAccount",
+        "AIChatModule",
 
         // Themes
         "DashboardAdminTheme",

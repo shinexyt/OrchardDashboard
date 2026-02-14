@@ -1,0 +1,54 @@
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chat</title>
+    <link rel="stylesheet" href="~/AIChatModule/css/chat.css">
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h1>AI Chat</h1>
+            <div class="model-selector">
+                <label for="modelSelect">Model:</label>
+                <select id="modelSelect">
+                    <option value="openai/gpt-3.5-turbo">GPT-3.5 Turbo</option>
+                    <option value="openai/gpt-4">GPT-4</option>
+                    <option value="anthropic/claude-3-haiku">Claude 3 Haiku</option>
+                    <option value="anthropic/claude-3-sonnet">Claude 3 Sonnet</option>
+                    <option value="google/gemini-pro">Gemini Pro</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="chat-messages" id="chatMessages">
+            <div class="message system-message">
+                <div class="message-content">
+                    <p>Welcome to AI Chat! Send a message to start chatting.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chat-input-container">
+            <div class="input-wrapper">
+                <textarea 
+                    id="messageInput" 
+                    placeholder="Type your message here..." 
+                    rows="1"
+                    autofocus></textarea>
+                <button id="sendButton" class="send-button">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M7 11L12 6L17 11M12 18V7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="~/AIChatModule/js/chat.js"></script>
+</body>
+</html>
