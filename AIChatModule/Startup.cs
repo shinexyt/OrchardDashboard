@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.FileProviders;
 
 namespace AIChatModule;
 
@@ -35,16 +34,7 @@ public class Startup
 
     public void Configure(IApplicationBuilder app, IEndpointRouteBuilder routes)
     {
-        // Serve static files from wwwroot
-        var fileProvider = new ManifestEmbeddedFileProvider(
-            typeof(Startup).Assembly,
-            "wwwroot"
-        );
-
-        app.UseStaticFiles(new StaticFileOptions
-        {
-            FileProvider = fileProvider,
-            RequestPath = "/AIChatModule"
-        });
+        // Note: Static files from wwwroot are automatically served by OrchardCore
+        // The module's wwwroot folder will be available at /AIChatModule/
     }
 }
