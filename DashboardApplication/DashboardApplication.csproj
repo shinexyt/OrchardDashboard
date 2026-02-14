@@ -29,6 +29,7 @@
 		<ProjectReference Include="..\DashboardAdminTheme\CustomAdminTheme.csproj" />
 		<ProjectReference Include="..\Module1\Module1.csproj" />
 		<ProjectReference Include="..\Module2\Module2.csproj" />
+		<ProjectReference Include="..\AIChatModule\AIChatModule.csproj" />
 	</ItemGroup>
 
 </Project>

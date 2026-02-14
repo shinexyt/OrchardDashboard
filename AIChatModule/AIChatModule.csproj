@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<OutputType>Library</OutputType>
+		<IsPackable>true</IsPackable>
+		<PackageVersion>1.0.0</PackageVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="OrchardCore.Module.Targets" Version="2.2.1" />
+		<PackageReference Include="Microsoft.Extensions.AI.Abstractions" Version="9.0.1-preview.1.24570.5" />
+		<PackageReference Include="OpenAI" Version="2.1.0" />
+	</ItemGroup>
+
+</Project>
