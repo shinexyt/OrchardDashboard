@@ -108,10 +108,12 @@ class ChatApp {
                             this.scrollToBottom();
                         }
                     } catch (e) {
-                        // Ignore JSON parse errors for partial data
-                        if (!e.message.includes('Unexpected')) {
+                        // Only ignore JSON parsing errors for incomplete data chunks
+                        // Re-throw other types of errors
+                        if (!(e instanceof SyntaxError)) {
                             throw e;
                         }
+                        // Incomplete JSON chunk, will be completed in next iteration
                     }
                 }
             }

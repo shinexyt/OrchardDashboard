@@ -18,8 +18,21 @@ An OrchardCore module that provides AI-powered chat functionality using Server-S
 ## Installation
 
 1. The module is already added to the OrchardDashboard solution
-2. Configure your OpenRouter API key in `appsettings.json` or `appsettings.Development.json`:
+2. Configure your OpenRouter API key. **Important**: Never commit API keys to source control!
 
+**Option 1: User Secrets (Recommended for Development)**
+```bash
+cd DashboardApplication
+dotnet user-secrets set "OpenRouter:ApiKey" "YOUR_API_KEY_HERE"
+```
+
+**Option 2: Environment Variables (Recommended for Production)**
+```bash
+export OpenRouter__ApiKey="YOUR_API_KEY_HERE"
+```
+
+**Option 3: Configuration File (Not Recommended)**
+Update `appsettings.json` or `appsettings.Development.json`:
 ```json
 {
   "OpenRouter": {
